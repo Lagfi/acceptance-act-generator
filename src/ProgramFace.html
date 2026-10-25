@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генерация актов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+        <body>
+            <form  action="/create-act" method="POST">
+                <label>Пол сотрудника</label>
+                <select name="gender">
+                    <option value="Мужской">Мужской</option>
+                    <option value="Женский">Женский</option>
+                </select>
+
+                <label>Пол регионала</label>
+                <select name="genderReg">
+                    <option value="Мужской">Мужской</option>
+                    <option value="Женский">Женский</option>
+                </select>
+
+                <label>Фамилия сотрудника</label>
+                <input type="text" name="lastName">
+
+                <label>Имя сотрудника</label>
+                <input type="text" name="firstName">
+
+                <label>Отчество сотрудника</label>
+                <input type="text" name="middleName">
+
+                <label>Должность сотрудника в дательном падеже</label>
+                <input type="text" name="jobTitle" id="jobTitleInput">
+                <span id="jobTitleHint">Пожалуйста, введите должность в дательном падеже (кому?)</span>
+
+                <label>Фамилия регионала</label>
+                <input type="text" name="lastNameReg">
+
+                <label>Имя регионала</label>
+                <input type="text" name="firstNameReg">
+
+                <label>Отчество регионала</label>
+                <input type="text" name="middleNameReg">
+
+                <label>Модель ноутбука</label>
+                <input type="text" name="model">
+
+                <label>Серийный номер</label>
+                <input type="text" name="serial">
+
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span class="btn-text">Сгенерировать акт</span>
+                    <div class="loader" id="btnLoader"></div>
+                </button>
+            </form>
+        </body>
+<script src="Animations.js"></script>
+</html>
