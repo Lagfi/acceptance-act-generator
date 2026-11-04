@@ -8,38 +8,19 @@
 </head>
         <body>
             <form  action="/create-act" method="POST">
-                <label>Пол сотрудника</label>
-                <select name="gender">
-                    <option value="Мужской">Мужской</option>
-                    <option value="Женский">Женский</option>
-                </select>
+                <datalist id="positionsData"></datalist>
+                
+                <label>ФИО сотрудника</label>
+                <input type="text" name="fullNameS">
 
-                <label>Пол регионала</label>
-                <select name="genderReg">
-                    <option value="Мужской">Мужской</option>
-                    <option value="Женский">Женский</option>
-                </select>
+                <label>Должность сотрудника</label>
+                <input type="text" name="jobTitle" id="list" list="positionsData">
 
-                <label>Фамилия сотрудника</label>
-                <input type="text" name="lastName">
+                <label>ФИО мат.ответсвенного</label>
+                <input type="text" name="fullNameR">
 
-                <label>Имя сотрудника</label>
-                <input type="text" name="firstName">
-
-                <label>Отчество сотрудника</label>
-                <input type="text" name="middleName">
-
-                <span id="jobTitleHint">Введите должность сотрудника в дательном падеже (кому?)</span>
-                <input type="text" name="jobTitle" id="jobTitleInput">
-
-                <label>Фамилия регионала</label>
-                <input type="text" name="lastNameReg">
-
-                <label>Имя регионала</label>
-                <input type="text" name="firstNameReg">
-
-                <label>Отчество регионала</label>
-                <input type="text" name="middleNameReg">
+                <label>Должность мат.ответственного</label>
+                <input type="text" name="jobTitleR" id="listR" list="positionsData">
 
                 <label>Модель ноутбука</label>
                 <input type="text" name="model">

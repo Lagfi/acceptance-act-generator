@@ -1,18 +1,22 @@
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector('form');
-    const input = document.getElementById("jobTitleInput");
-    const hint = document.getElementById("jobTitleHint");
-
-    if (input && hint) {
-        input.addEventListener('input', function() {
-            let text = this.value;
-            if (text == "") {
-                hint.textContent = "Введите должность сотрудника";
-            } else {
-                hint.textContent = "Акт будет оформлен: " + text;
-            }
+    const dataListWarehouse = document.getElementById("positionsData");
+    fetch("http://localhost:63412/api/positions")
+        .then(response => response.json())
+        .then(data => {
+            dataListWarehouse.innerHTML = "";
+            data.forEach(position => {
+                const option = document.createElement("option")
+                let prettyName = position.charAt(0).toUpperCase() + position.slice(1);
+                option.textContent = prettyName;
+                dataListWarehouse.appendChild(option);
+            });
+            console.log("Данные с бэкапа прилетели:", data);
+        })
+        .catch(error => {
+            console.error("Косяк сети:", error);
+            dataListWarehouse.innerHTML = "<option>Ошибка загрузки должностей</option>";
         });
-    }
     if (form) {
         form.addEventListener('submit', function() {
             const btn = document.getElementById('submitBtn');
