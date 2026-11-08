@@ -7,8 +7,10 @@ import java.util.HashMap;
 
 public class DataFile {
     public static final HashMap<String, String> positionsMap = new HashMap<>();
+    public static final HashMap<String, String> molpositionsMap = new HashMap<>();
     public static void loadPositionsDB(){
         String line;
+        String cleanPar = "";
         try {
             Path path = Paths.get("db_positions/positions.txt");
             BufferedReader reader = Files.newBufferedReader(path);
@@ -20,18 +22,27 @@ public class DataFile {
                 String[] parts = line.split("=");
                 String par = parts[0].trim().toLowerCase();
                 String par2 = parts[1].trim();
-                positionsMap.put(par , par2);
+
+                if (par.startsWith("*")){
+                    cleanPar = par.substring(1);
+                    molpositionsMap.put(cleanPar , par2);
+                }else {
+                    positionsMap.put(par , par2);
+                }
             }
             reader.close();
 
         }catch (Exception q){
-            IO.println("Файл не найден");
+            IO.println("Файл БД мат.ответсвенных не найден");
         }
     }
     public static String getposition (String webPosition, Case myCase){
         String outWeb = webPosition.trim().toLowerCase();
         String result = positionsMap.get(outWeb);
         String[] genitiv;
+        if (result == null) {
+            result = molpositionsMap.get(outWeb);
+        }
         if (result != null){
             genitiv = result.split("\\|");
             if (myCase == Case.Dative) {
@@ -40,6 +51,6 @@ public class DataFile {
                 return FioProcessor.fixRegister(genitiv[1]);
             }else{return FioProcessor.fixRegister(genitiv[0]);}
         }
-            return (FioProcessor.fixRegister(webPosition.trim()));
+        return (FioProcessor.fixRegister(webPosition.trim()));
     }
 }

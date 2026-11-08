@@ -9,6 +9,7 @@
         <body>
             <form  action="/create-act" method="POST">
                 <datalist id="positionsData"></datalist>
+                <datalist id="molPositionsData"></datalist>
                 
                 <label>ФИО сотрудника</label>
                 <input type="text" name="fullNameS">
@@ -20,7 +21,7 @@
                 <input type="text" name="fullNameR">
 
                 <label>Должность мат.ответственного</label>
-                <input type="text" name="jobTitleR" id="listR" list="positionsData">
+                <input type="text" name="jobTitleR" id="listR" list="molPositionsData">
 
                 <label>Модель ноутбука</label>
                 <input type="text" name="model">

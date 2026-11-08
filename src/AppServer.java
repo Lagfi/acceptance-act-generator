@@ -12,6 +12,7 @@ public class AppServer {
             server.createContext("/style.css", new StyleHandler("style.css", "text/css"));
             server.createContext("/Animations.js", new StyleHandler("Animations.js", "application/javascript"));
             server.createContext("/api/positions" , new PositionsHandler());
+            server.createContext("/api/molpositions" , new MolPositionsHandler());
             server.start();
             IO.println("=== Веб-сервер: успешное включение на порту 63412! ===");
         } catch (Exception e) {
