@@ -1,4 +1,6 @@
 import com.github.petrovich4j.Case;
+import padeg.lib.Padeg;
+
 import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,18 +18,15 @@ public class DataFile {
             BufferedReader reader = Files.newBufferedReader(path);
             while ((line = reader.readLine()) != null){
                 line = line.trim();
-                if (line.isEmpty() || !line.contains("=")){
+                if (line.isEmpty()){
                     continue;
                 }
-                String[] parts = line.split("=");
-                String par = parts[0].trim().toLowerCase();
-                String par2 = parts[1].trim();
-
-                if (par.startsWith("*")){
-                    cleanPar = par.substring(1);
-                    molpositionsMap.put(cleanPar , par2);
+                if (line.startsWith("*")){
+                    cleanPar = line.substring(1).trim().toLowerCase();
+                    molpositionsMap.put(cleanPar, cleanPar);
                 }else {
-                    positionsMap.put(par , par2);
+                    cleanPar = line.trim().toLowerCase();
+                    positionsMap.put(cleanPar, cleanPar);
                 }
             }
             reader.close();
@@ -37,20 +36,21 @@ public class DataFile {
         }
     }
     public static String getposition (String webPosition, Case myCase){
+        String padege = webPosition.trim();
+        int padegNum = 1;
         String outWeb = webPosition.trim().toLowerCase();
         String result = positionsMap.get(outWeb);
-        String[] genitiv;
         if (result == null) {
             result = molpositionsMap.get(outWeb);
         }
         if (result != null){
-            genitiv = result.split("\\|");
-            if (myCase == Case.Dative) {
-                return FioProcessor.fixRegister(genitiv[0]);
-            }else if(myCase == Case.Genitive && genitiv.length >= 2){
-                return FioProcessor.fixRegister(genitiv[1]);
-            }else{return FioProcessor.fixRegister(genitiv[0]);}
+            if (myCase == Case.Dative){
+                padegNum = 3;
+            } else if (myCase == Case.Genitive) {
+                padegNum = 2;
+            }
+            padege = Padeg.getAppointmentPadeg(result, padegNum);
         }
-        return (FioProcessor.fixRegister(webPosition.trim()));
+        return (FioProcessor.fixRegister(padege));
     }
 }

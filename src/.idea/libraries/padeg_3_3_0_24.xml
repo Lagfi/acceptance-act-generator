@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="padeg-3.3.0.24">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/padeg-3.3.0.24.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
